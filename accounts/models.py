@@ -57,7 +57,6 @@ class User(AbstractBaseUser):
     phone_number = models.CharField(max_length=12, blank=True)
     role = models.PositiveSmallIntegerField(choices = ROLE_CHOICE, blank=True, null= True)
 
-
     # required field
 
     date_joined = models.DateTimeField(auto_now_add=True)
@@ -83,6 +82,18 @@ class User(AbstractBaseUser):
     def has_module_perms(self, app_label):
         return True
     
+    
+    def get_role(self):
+        if self.role == 1:
+            user_role = 'Vendor'
+        elif self.role == 2:
+            user_role = 'Customer'
+        else:
+            user_role = 'Unknown'
+        return user_role
+            
+
+
 
 
 
